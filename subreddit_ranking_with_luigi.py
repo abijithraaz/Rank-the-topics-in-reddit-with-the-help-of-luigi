@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import praw
 import pandas as pd
 import openpyxl
 import os
 import luigi
+import time
 
 class MyTask(luigi.Task):
     api_client_id = luigi.Parameter()
@@ -38,9 +41,9 @@ class MyTask(luigi.Task):
         (sheet2.cell(row = 1, column = 4)).value = "SCORE"
 
         # get trendiest posts from all subreddits
-        hot_posts = reddit.subreddit('all').hot(limit=1)
-        top_posts = reddit.subreddit('all').top(limit=1)
-        controversial = reddit.subreddit('all').controversial(limit=1)
+        hot_posts = reddit.subreddit('all').hot()
+        top_posts = reddit.subreddit('all').top()
+        controversial = reddit.subreddit('all').controversial()
 
         new_list = [hot_posts, top_posts, controversial]    #creating a trending post lists
         i = 2
@@ -58,7 +61,7 @@ class MyTask(luigi.Task):
                 i += 1
                 if not submission.stickied:
                     submission.comments.replace_more(limit=0)
-                    for comment in submission.comments.list()[:2]:
+                    for comment in submission.comments.list():
                         l = 1
                         (sheet2.cell(row = k, column = l)).value = str(comment.parent())
                         l += 1
@@ -111,6 +114,7 @@ class MyTask(luigi.Task):
                 continue
             comments.append([data.value for data in row])       
         comments = pd.DataFrame(comments,columns=['ParentID', 'CommentId', 'Comment', 'Score'])
+
         # Sorting the data frames
         posts = posts.sort_values(by = ["ParentID"],ascending=False)
         posts.reset_index(drop=True,inplace=True)
@@ -171,9 +175,9 @@ class MyTask(luigi.Task):
         '''
         Creating output files and logs
         '''
-        # Checking the file is exist
-        if os.path.isfile('subreddit_rank_op.xlsx'):
-            os.remove("subreddit_rank_op.xlsx")
+        # Checking the output directory is exist
+        if not os.path.isdir('output_log'):
+            os.mkdir("output_log")
 
         wb1 = openpyxl.Workbook()
 
@@ -232,7 +236,9 @@ class MyTask(luigi.Task):
                 rank_row += 1
             else:
                 break
-        wb1.save("subreddit_rank_op.xlsx")
+        local_time = time.localtime()
+        time_string = time.strftime("%m_%d_%Y_%H_%M_%S", local_time)
+        wb1.save("output_log/subreddit_rank_op_{}.xlsx".format(time_string))
 
 if __name__ == "__main__":
     luigi.run()
