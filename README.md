@@ -22,7 +22,7 @@ Please edit the line below line in **subreddit_twice_day.py** by replace the api
   
    Run the command: docker build –t <base image name>  
                   eg: docker build –t  subreddit_ranking . 
-                  
+  Before run the below command need to create output_log folder and give to the below code.             
   Run the command in terminal to run the project.
                 :> Docker run –v /host/fullpath:/container/path <base image name> 
                 Eg: docker run -v D:/Allianz/output_log:/workspace/output_log subreddit_ranking
