@@ -6,7 +6,7 @@ Solution that tracks and ranks the trending topics in Reddit over time. With hel
 Please edit the line below line in **subreddit_twice_day.py** by replace the api_client_id and api_client secret arguments.
 "os.system('python -m luigi --module subreddit_ranking_with_luigi MyTask --api-client-id **4IPibhzEWutTxA** --api-client-secret **ypLf67zPm1VCacoIvQlbcRBs65-Urw** --local-scheduler')".
 
-Before run the below command need to create **output_log** folder and give to the below code.
+Before run the below command, need to create **output_log** folder and give to the below code.
 
 please give the commands:> **python subreddit_twice_day.py**
 
@@ -28,7 +28,7 @@ Please edit the line below line in **subreddit_twice_day.py** by replace the api
    Run the command: docker build –t <base image name>  
                   eg: docker build –t  subreddit_ranking . 
   
-  Before run the below command need to create output_log folder and give to the below code.
+  Before run the below command, need to create output_log folder and give to the below code.
   
   Run the command in terminal to run the project.
                 :> Docker run –v /host/fullpath:/container/path <base image name> 
