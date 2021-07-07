@@ -31,5 +31,5 @@ Please edit the line below line in **subreddit_twice_day.py** by replace the api
                 :> Docker run –v /host/fullpath:/container/path <base image name> 
                 Eg: docker run -v D:/Allianz/output_log:/workspace/output_log subreddit_ranking
 ## Full Documentation
-  The project solution full documentation is in the **README.docx**
+  The project solution full documentation is in the **README.docx**. Just go through it when you need to know more about the project.
     
