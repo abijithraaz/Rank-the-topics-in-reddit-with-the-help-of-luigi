@@ -6,7 +6,7 @@ import luigi
 import pickle
 import subreddit_rank_support as sr
 
-SUBREDDIT_LIMIT = 2
+SUBREDDIT_LIMIT = 50
 OUTPUT_POST_LIMIT = 10
 OUTPUT_COMMENTS_LIMIT = 5
 OUTPUT_DATA_PATH = "data"
