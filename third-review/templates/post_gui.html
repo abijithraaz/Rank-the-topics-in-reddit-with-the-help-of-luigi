@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reddit Ranker</title>
+<link rel="stylesheet" href="subreddit.css">
+</head>
+<body>
+    <form action = "http://localhost:5000/comments" method = "POST">
+    <h1 style="color: blue;"> <b>Posts Of The Selected Subreddit</b></h1>
+    <p>Here showing the top posts of the subreddit.</p>
+    <br>
+    <p>To know the top comments of the posts. Please give the PostID.</p>
+    <table style="border: 1px solid black;width: 50%;text-align: center;">
+        <tr>
+        <th style="border: 1px solid black;">PostID</th>
+        <th style="border: 1px solid black;">Subreddit</th>
+        <th style="border: 1px solid black;">Title</th>
+        <th style="border: 1px solid black;">NoOfComments</th>
+        </tr>
+        {% for val in result %}
+        <tr>
+        <td style="border: 1px solid black;">{{val[0]}}</td>
+        <td style="border: 1px solid black;">{{val[1]}}</td>
+        <td style="border: 1px solid black;">{{val[2]}}</td>
+        <td style="border: 1px solid black;">{{val[3]}}</td>
+        </tr>
+        {% endfor %}
+        <p style="text-align:left;">PostID <input type = "text" name = "PostID" /></p>
+        <p style="align-items: baseline;"><input type = "submit" value = "GotoComments"/></p>
+    </form>
+</body>
+</html>
