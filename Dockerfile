@@ -11,6 +11,5 @@ COPY templates ./templates
 COPY configuration ./configuration
 
 EXPOSE 5000
-EXPOSE 3306
 
 CMD ["python", "app.py"]
