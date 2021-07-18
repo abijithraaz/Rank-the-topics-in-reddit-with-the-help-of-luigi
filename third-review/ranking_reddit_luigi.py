@@ -43,12 +43,12 @@ class DataExtraction(luigi.Task):
         subreddits = reddit.subreddits.popular(limit = SUBREDDIT_LIMIT) # Lists the top 50 subreddits
 
         for subreddit in subreddits:
-            top_posts = reddit.subreddit(str(subreddit)).top(limit = 5)
+            top_posts = reddit.subreddit(str(subreddit)).top()
             for post in top_posts:
                 if not post.stickied:
                     post_list = [post.id, str(post.subreddit), post.title, post.num_comments]
                     post.comments.replace_more(limit = 0)
-                    for comment in post.comments.list()[:5]:
+                    for comment in post.comments.list():
                         comment_list = [str(comment.parent()), comment.id, comment.body, int(comment.score)]
                         comment_df_list.append(comment_list)
                     post_df_list.append(post_list)
