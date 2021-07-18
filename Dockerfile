@@ -2,7 +2,15 @@ FROM subreddit_ranking
 
 WORKDIR /workspace
 
-COPY subreddit_ranking_with_luigi.py ./
-COPY subreddit_twice_day.py ./
+COPY app.py ./
+COPY ranking_reddit_luigi.py ./
+COPY reddit_configuration.py ./
+COPY storage.py ./
+COPY subreddit_rank_support.py ./
+COPY templates ./templates
+COPY configuration ./configuration
 
-CMD ["python", "subreddit_twice_day.py"]
+EXPOSE 5000
+EXPOSE 3306
+
+CMD ["python", "app.py"]
