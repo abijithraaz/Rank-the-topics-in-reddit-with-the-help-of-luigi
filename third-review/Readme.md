@@ -12,7 +12,7 @@ Solution that tracks and ranks the trending topics in Reddit over time. With hel
 # To run the code in docker
 Open a terminal from the docker folder in the working directory.
 
-Run the command: docker build –t
+Run the command: docker build –t <name>
 
 **eg: docker build –t subreddit_ranking .**
 
