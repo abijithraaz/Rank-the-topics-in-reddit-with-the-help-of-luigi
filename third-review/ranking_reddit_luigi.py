@@ -108,12 +108,6 @@ class DataOutput(luigi.Task):
     def requires(self):
         return DataProcessing(self.process_id)
     
-    def output(self):
-        if not os.path.isdir(OUTPUT_LOG_PATH):
-            os.mkdir(OUTPUT_LOG_PATH)
-
-        return luigi.LocalTarget(self.process_id.strftime(OUTPUT_LOG_PATH+"/subreddit_%Y_%m_%d_%H.xlsx"))
-
     def run(self):
         datafram_input = []
 
@@ -144,5 +138,3 @@ class DataOutput(luigi.Task):
         db.output_posts_to_db(post_df_list, task_id)
         db.output_comments_to_db(comment_df_list, task_id)
 
-        output_df = [subreddit_df, post_df_list, comment_df_list]
-        sr.save_xlsx(output_df, self.output().path)
