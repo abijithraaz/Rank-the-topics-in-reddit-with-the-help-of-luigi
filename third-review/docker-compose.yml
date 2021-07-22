@@ -6,8 +6,8 @@ services:
             context: .
             dockerfile: Dockerfile
         image: subreddit_ranking
-        
-    
+        ports:
+            - "5000:5000"
     mysql:
         image: mysql:latest
         restart: always
@@ -16,4 +16,4 @@ services:
             MYSQL_USER: 'root'
             MYSQL_PASSWORD: 'Abijith12@'
         ports:
-            - "3306:3306"
+            - "3307:3306"
