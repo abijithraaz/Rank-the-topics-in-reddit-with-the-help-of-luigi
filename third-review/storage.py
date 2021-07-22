@@ -13,12 +13,11 @@ def db_connection():
     password=db_config['PASSWORD'])
 
     mycursor = db.cursor()
-    # Checking the existency of code
+    # Checking the existency of db
     mycursor.execute("SHOW DATABASES")
     for database in mycursor:
         db_list.append(database[0])
     
-    # mycursor = db.cursor()
     if (db_config['DATABASE'] not in db_list):
         sql = "CREATE DATABASE " + db_config['DATABASE']
         mycursor.execute(sql)
