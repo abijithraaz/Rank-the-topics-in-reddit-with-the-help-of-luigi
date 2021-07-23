@@ -26,4 +26,4 @@ To run the project
 
 Give the command '**docker-compose up -d**' in the console.
 
-once the starting process is completed please give '**http://127.0.0.1:8000/**' in browser.
+once the starting process is completed please give '**http://127.0.0.1:5000/**' in browser.
