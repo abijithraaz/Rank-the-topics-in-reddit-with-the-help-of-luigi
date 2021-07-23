@@ -3,6 +3,7 @@ Solution that tracks and ranks the trending topics in Reddit over time. With hel
 
 # To run the project
   Change the configuration and credentials in **config.ini** and follow the below method.
+  Also please give the host name as **localhost**
 
 # To run the code locally 
   $ python app.py
@@ -18,6 +19,8 @@ Run the command: docker build –t <name>
 
 Run the command to verify that image is created is :> docker images
 
+Please edit the db host ip from localhost to mysql container ip.
+  
 Then build the project using below command
 
 eg: **docker-compose build** 
