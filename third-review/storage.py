@@ -32,7 +32,7 @@ def db_connection():
     return mydb
 
 def output_subreddit_to_db(df, date_time):
-    table = "Subreddit_"
+    table = "subreddit_"
     mydb = db_connection()
     mycursor = mydb.cursor()
 
@@ -49,7 +49,7 @@ def output_subreddit_to_db(df, date_time):
         mydb.commit()
     
 def output_posts_to_db(df, date_time):
-    table = "Posts_"
+    table = "posts_"
     mydb = db_connection()
 
     mycursor = mydb.cursor()
@@ -66,7 +66,7 @@ def output_posts_to_db(df, date_time):
         mydb.commit()
 
 def output_comments_to_db(df, date_time):
-    table = "Comments_"
+    table = "comments_"
     mydb = db_connection()
     mycursor = mydb.cursor()
 
