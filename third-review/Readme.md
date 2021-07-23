@@ -7,7 +7,7 @@ Solution that tracks and ranks the trending topics in Reddit over time. With hel
 # To run the code locally 
   $ python app.py
   
-  once the starting process is completed please give **http://127.0.0.1:8000/** in browser.
+  once the starting process is completed please give **http://127.0.0.1:5000/** in browser.
 
 # To run the code in docker
 Open a terminal from the docker folder in the working directory.
