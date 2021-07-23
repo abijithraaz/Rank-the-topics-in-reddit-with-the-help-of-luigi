@@ -3,7 +3,8 @@ Solution that tracks and ranks the trending topics in Reddit over time. With hel
 
 # To run the project
   Change the configuration and credentials in **config.ini** and follow the below method.
-  Also please give the host name as **localhost**
+  
+  Also please give the host name as **localhost**.
 
 # To run the code locally 
   $ python app.py
