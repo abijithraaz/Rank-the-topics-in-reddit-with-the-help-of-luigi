@@ -4,7 +4,7 @@ import luigi
 import pickle
 import subreddit_rank_support as sr
 import reddit_configuration as rc
-import storage as db
+from storage import CustomMysql
 
 SUBREDDIT_LIMIT = int((rc.reddit_config_load('OUTPUT'))['SUBREDDIT_LIMIT'])
 OUTPUT_POST_LIMIT = int((rc.reddit_config_load('OUTPUT'))['POST_LIMIT'])
@@ -43,12 +43,12 @@ class DataExtraction(luigi.Task):
         subreddits = reddit.subreddits.popular(limit = SUBREDDIT_LIMIT) # Lists the top 50 subreddits
 
         for subreddit in subreddits:
-            top_posts = reddit.subreddit(str(subreddit)).top()
+            top_posts = reddit.subreddit(str(subreddit)).top(limit = 5)
             for post in top_posts:
                 if not post.stickied:
                     post_list = [post.id, str(post.subreddit), post.title, post.num_comments]
                     post.comments.replace_more(limit = 0)
-                    for comment in post.comments.list():
+                    for comment in post.comments.list()[:5]:
                         comment_list = [str(comment.parent()), comment.id, comment.body, int(comment.score)]
                         comment_df_list.append(comment_list)
                     post_df_list.append(post_list)
@@ -107,6 +107,17 @@ class DataOutput(luigi.Task):
 
     def requires(self):
         return DataProcessing(self.process_id)
+
+    def output(self):
+        db_config = rc.reddit_config_load("DBCRED")
+
+        task_id = self.process_id.strftime("%Y_%m_%d_%H")
+        return CustomMysql(host=db_config['HOST'], 
+                            database=db_config['DATABASE'], 
+                            user=db_config['USER'], 
+                            password=db_config['PASSWORD'], 
+                            table=db_config['IDTABLE'], 
+                            update_id= task_id)
     
     def run(self):
         datafram_input = []
@@ -134,7 +145,9 @@ class DataOutput(luigi.Task):
         task_id = self.process_id.strftime("%Y_%m_%d_%H")
         post_df_list.reset_index(drop=True,inplace=True)
         comment_df_list.reset_index(drop=True,inplace=True)
-        db.output_subreddit_to_db(subreddit_df, task_id)
-        db.output_posts_to_db(post_df_list, task_id)
-        db.output_comments_to_db(comment_df_list, task_id)
 
+        self.output().dataid_to_db(task_id)
+        self.output().outputsub_to_db(subreddit_df, task_id)
+        self.output().output_posts_to_db(post_df_list, task_id)
+        self.output().output_comments_to_db(comment_df_list, task_id)
+        self.output().touch()
