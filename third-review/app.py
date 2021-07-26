@@ -6,8 +6,6 @@ import luigi
 import datetime
 
 app = Flask(__name__)
-date_hour = datetime.datetime.now()
-job_id = date_hour.strftime("%Y_%m_%d_%H")
 DB_CONFIG = rc.reddit_config_load("DBCRED")
 DATA_ID = ""
 
@@ -92,6 +90,7 @@ def comments():
    return render_template('comments_gui.html', result = subreddit_list)
 
 if __name__ == '__main__':
+   date_hour = datetime.datetime.now()
    reddit_db.db_establishment()
    luigi.build([DataOutput(process_id=date_hour)], local_scheduler=True)
    app.run(host='0.0.0.0')
