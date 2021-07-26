@@ -112,7 +112,7 @@ class DataOutput(luigi.Task):
         db_config = rc.reddit_config_load("DBCRED")
 
         task_id = self.process_id.strftime("%Y_%m_%d_%H")
-        return CustomMysql(host=db_config['HOST'], 
+        return CustomMysql(host=db_config['HOST_PORT'], 
                             database=db_config['DATABASE'], 
                             user=db_config['USER'], 
                             password=db_config['PASSWORD'], 
