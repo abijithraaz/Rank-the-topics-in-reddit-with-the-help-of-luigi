@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reddit Ranker</title>
+<link rel="stylesheet" href="subreddit.css">
+</head>
+<body>
+<h1 style="color: blue;"> <b>Comments Of The Selected Post</b></h1>
+<p>Here showing the top comments of the post and its details.</p>
+<table style="border: 1px solid black;width: 50%;text-align: center;">
+    <tr>
+      <th style="border: 1px solid black;">PostID</th>
+      <th style="border: 1px solid black;">CommentID</th>
+      <th style="border: 1px solid black;">comment</th>
+      <th style="border: 1px solid black;">CommentScore</th>
+    </tr>
+    {% for val in result %}
+    <tr>
+      <td style="border: 1px solid black;">{{val[0]}}</td>
+      <td style="border: 1px solid black;">{{val[1]}}</td>
+      <td style="border: 1px solid black;">{{val[2]}}</td>
+      <td style="border: 1px solid black;">{{val[3]}}</td>
+    </tr>
+    {% endfor %}
+</body>
+</html>

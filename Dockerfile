@@ -10,6 +10,5 @@ COPY subreddit_rank_support.py ./
 COPY templates ./templates
 COPY configuration ./configuration
 
-EXPOSE 5000
 
 CMD ["python", "app.py"]
