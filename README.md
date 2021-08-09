@@ -8,6 +8,7 @@ Solution that tracks and ranks the trending topics in Reddit over time. With hel
 
 # To run the code locally
 Please give the below command in the terminal.
+
   $ python app.py
   
   once the starting process is completed please give **http://127.0.0.1:5000/** in browser.
